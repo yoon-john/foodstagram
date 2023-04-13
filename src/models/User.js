@@ -13,11 +13,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  shoppinglist: {
-    type: Array,
-    required: false,
+  createdAt: {
+    type: Date,
+    default: Date.now(),
   },
-  // Add more fields for information on the user.
 });
 
 // export model user with UserSchema

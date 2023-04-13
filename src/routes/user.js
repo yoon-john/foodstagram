@@ -1,12 +1,11 @@
 const express = require("express");
-const { check, validationResult } = require("express-validator");
+const { check, validationResult } = require("express-validator/check");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
+const auth = require("../middleware/auth");
 
 const User = require("../models/User");
-
-const auth = require("./../middleware/auth");
 
 /**
  * @method - POST
@@ -34,7 +33,7 @@ router.post(
     const { username, email, password } = req.body;
     try {
       let user = await User.findOne({
-        username,
+        email,
       });
       if (user) {
         return res.status(400).json({
@@ -56,14 +55,12 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          // Add more fields to the payload
         },
       };
 
       jwt.sign(
         payload,
-        "random String",
-        // Make a new hash String
+        "randomString",
         {
           expiresIn: 10000,
         },
@@ -101,8 +98,7 @@ router.post(
     const { email, password } = req.body;
     try {
       let user = await User.findOne({
-        email
-        // email: email,
+        email,
       });
       if (!user)
         return res.status(400).json({
@@ -118,17 +114,14 @@ router.post(
       const payload = {
         user: {
           id: user.id,
-          list: user.shoppinglist
-          // Add more fields to the payload
         },
       };
 
       jwt.sign(
         payload,
         "randomString",
-        // Use the same secret string for signing
         {
-          expiresIn: 10000,
+          expiresIn: 3600,
         },
         (err, token) => {
           if (err) throw err;
@@ -147,7 +140,7 @@ router.post(
 );
 
 /**
- * @method - GET
+ * @method - POST
  * @description - Get LoggedIn User
  * @param - /user/me
  */
@@ -165,7 +158,7 @@ router.get("/me", auth, async (req, res) => {
 router.delete("/remove-user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    const response = await User.deleteOne(user);
+    const response = await User.deleteOne({ _id: req.user.id });
     res.json(response);
   } catch (e) {
     res.send({ message: "There was an error with deleting your account." });
@@ -174,7 +167,15 @@ router.delete("/remove-user", auth, async (req, res) => {
 
 router.put("/update-user", auth, async (req, res) => {
   try {
-    const response = await User.updateOne(______, ______);
+    const response = await User.updateOne(
+      { _id: req.user.id },
+      {
+        $set: {
+          username: req.body.new_username,
+          password: req.body.new_password,
+        },
+      }
+    );
     res.json(response);
   } catch (e) {
     res.send({ message: "There was an error with updating your information." });
