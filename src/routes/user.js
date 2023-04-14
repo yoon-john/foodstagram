@@ -13,6 +13,7 @@ const User = require("../models/User");
  * @description - User SignUp
  */
 
+// Call this to sign up new user
 router.post(
   "/signup",
   [
@@ -78,6 +79,7 @@ router.post(
   }
 );
 
+// Call this to login user
 router.post(
   "/login",
   [
@@ -145,6 +147,7 @@ router.post(
  * @param - /user/me
  */
 
+// Call this to return user profile information
 router.get("/me", auth, async (req, res) => {
   try {
     // request.user is getting fetched from Middleware after token authentication
@@ -155,6 +158,7 @@ router.get("/me", auth, async (req, res) => {
   }
 });
 
+// Call this to remove user from database
 router.delete("/remove-user", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
@@ -165,6 +169,7 @@ router.delete("/remove-user", auth, async (req, res) => {
   }
 });
 
+// Call this to change username or password
 router.put("/update-user", auth, async (req, res) => {
   try {
     const response = await User.updateOne(
@@ -179,6 +184,21 @@ router.put("/update-user", auth, async (req, res) => {
     res.json(response);
   } catch (e) {
     res.send({ message: "There was an error with updating your information." });
+  }
+});
+
+// Call this to add a recipe to profile
+router.post("/add-recipe", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    if (user.savedRecipes.indexOf(req.body.recid) === -1) {
+      // Body of request should contain recipe id in "recid" field
+      user.savedRecipes.push(req.body.recid);
+      user.save();
+      res.json(user.savedRecipes);
+    }
+  } catch (e) {
+    res.send({ message: "Error in Fetching user" });
   }
 });
 
