@@ -16,7 +16,12 @@ const UserSchema = mongoose.Schema({
   createdAt: {
     type: Date,
     required: false,
-  }
+  },
+  recipes: {
+    type: Array,
+    required: true,
+    default: [],
+  },
 });
 
 // export model user with UserSchema
