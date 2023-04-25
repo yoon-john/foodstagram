@@ -1,27 +1,30 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import "./App.css";
-import RecipeGrid from "./Components/RecipeGrid";
+import MainPage from "./Components/MainPage";
+import LandingPage from "./Components/LandingPage";
+import {Profile} from './Components/Profile';
 import React, { useState } from "react";
-import { Login } from "./Components/Login";
-import { Register } from "./Components/Register";
+import randomRecipes from'./randomRecipes.json';
+import Instructions from './Components/Instructions';
+import SearchBar from './Components/SearchBar';
+import RecipeGrid from './Components/RecipeGrid';
+
 
 function App() {
-  const [currentForm, setCurrentForm] = useState("login");
-
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  };
-
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <RecipeGrid />
-      </header>
-      {currentForm === "login" ? (
-        <Login onFormSwitch={toggleForm} />
-      ) : (
-        <Register onFormSwitch={toggleForm} />
-      )}
-    </div>
+    <BrowserRouter>
+    <SearchBar></SearchBar>
+    <RecipeGrid />
+      <div>
+        {/* The React Router that makes the HTML above work */}
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/recipes" element={<MainPage />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

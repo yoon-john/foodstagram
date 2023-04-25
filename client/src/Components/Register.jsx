@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import './../App.css';
 
 export const Register = (props) => {
   const [email, setEmail] = useState();
@@ -16,6 +20,7 @@ export const Register = (props) => {
       })
       .then((response) => {
         console.log(response);
+        props.onFormSwitch("login");
       })
       .catch((error) => {
         console.log(error);
@@ -23,40 +28,58 @@ export const Register = (props) => {
   };
 
   return (
-    <div className="auth-form-container">
-      <h2>Register</h2>
-      <form className="register-form" onSubmit={handleSubmit}>
-        <label htmlFor="username">username</label>
-        <input
-          value={username}
-          name="username"
-          onChange={(e) => setUsername(e.target.value)}
-          id="username"
-          placeholder="Insert username:"
-        />
-        <label htmlFor="email">email</label>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="youremail@gmail.com"
-          id="email"
-          name="email"
-        />
-        <label htmlFor="password">password</label>
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="********"
-          id="password"
-          name="password"
-        />
-        <button type="submit">Register</button>
-      </form>
-      <button className="link-btn" onClick={() => props.onFormSwitch("login")}>
-        Already have an account? Login here.
-      </button>
-    </div>
+    <Card id='LoginCard'>
+      <Form width="500" height="500" onSubmit={handleSubmit}>
+        <h1 id="Logo">Foodstagram</h1>
+        <div id="center">
+          <h2 id="loginBlurb">Sign up for Foodstagram</h2>
+        </div>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label id='label' htmlFor="username">Username</Form.Label>
+          <Form.Control 
+            value={username}
+            name="username"
+            onChange={(e) => setUsername(e.target.value)}
+            id="username"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label id='label' htmlFor="email">Email address</Form.Label>
+          <Form.Control 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            id="email"
+            name="email"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label id='label' htmlFor="password">Password</Form.Label>
+          <Form.Control 
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            id="password"
+            name="password"
+          />
+        </Form.Group> 
+        <div id="center">
+          <Button variant="primary" type="submit" id="mainButton">
+            Sign Up
+          </Button>
+        </div>
+        <div></div>
+      <a id="label">
+        Already have an account?
+      <Button 
+        variant="link"
+        className="link-btn"
+        onClick={() => props.onFormSwitch("login")}
+      >
+        Login here.
+      </Button>
+      </a>
+    </Form>
+    </Card>
   );
 };

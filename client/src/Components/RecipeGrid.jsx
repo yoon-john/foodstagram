@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RecipeCard from './RecipeCard';
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import './../App.css';
-import randomRecipes from'../randomRecipes.json'
+import RandomRecipes from './../randomRecipes.json'
 
-
-function RecipeGrid() {
-    return (
+function RecipeGrid(recipes) {
+  console.log(recipes) 
+  console.log(RandomRecipes.recipes)
+  if (recipes.recipes){
+  return (
         <Container fluid="md">
-        <Row>
+        <Row md="4">
         <>
-        {randomRecipes.recipes.map((r) => (
+        {recipes.recipes.map((r) => (
           <Col>
           <RecipeCard 
             sourceUrl={r.sourceUrl}
@@ -20,7 +22,10 @@ function RecipeGrid() {
             dishType={r.dishTypes[0] && r.dishTypes[0].toUpperCase()} 
             title={r.title}
             readyInMinutes={r.readyInMinutes}
-            aggregateLikes={r.aggregateLikes}>
+            aggregateLikes={r.aggregateLikes}
+            analyzedInstructions={r.analyzedInstructions[0].steps}
+            extendedIngredients={r.extendedIngredients}
+            >
           </RecipeCard>
           </Col>
         ))}
@@ -29,5 +34,5 @@ function RecipeGrid() {
       </Container>
     );
   }
-  
+}
 export default RecipeGrid;
