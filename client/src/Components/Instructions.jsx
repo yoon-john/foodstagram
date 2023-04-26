@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
@@ -9,7 +10,22 @@ import TimerImg from './../timer.svg';
 import HeartImg from './../heart.svg';
 import SaveImg from './../save.svg';
 
-function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients}) {
+function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients, id}) {
+  const saveRecipe = () => {
+    console.log("working")
+    const token = localStorage.getItem("token");
+    axios
+      .post(
+        "http://localhost:4000/user/add",
+        { item: id },
+        { headers: { token: token } }
+      )
+      .then((res) => {
+        console.log("wassup")
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <Modal
     id = "modal"
@@ -46,7 +62,9 @@ function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title,
           alignItems: 'center', justifyContent: 'right', }}>
                   <img id="svg" alt="heart svg" src={HeartImg} width="22"/>
                   {aggregateLikes}
-                  <img id="svg" alt="bookmark svg" src={SaveImg} height="18"/>
+                  <button onClick={saveRecipe}>
+                    <img id="svg" alt="bookmark svg" src={SaveImg} height="18"/>
+                  </button>
                 </Col>
               </Row>
             </Container>

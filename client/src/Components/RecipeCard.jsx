@@ -11,7 +11,7 @@ import HeartImg from './../heart.svg';
 import SaveImg from './../save.svg';
 import randomRecipes from'./../randomRecipes.json';
 
-function RecipeCard({sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients}) {
+function RecipeCard({sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients, id}) {
   const [modalShow, setModalShow] = React.useState(false);  
   return (
     <>
@@ -52,6 +52,7 @@ function RecipeCard({sourceUrl, image, dishType="RECIPE", title, readyInMinutes,
       aggregateLikes={aggregateLikes}
       analyzedInstructions={analyzedInstructions}
       extendedIngredients={extendedIngredients}
+      id={id}
     />
     </>
     );

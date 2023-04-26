@@ -142,7 +142,16 @@ recipeTitleOTD{
 }
 
 #bottomBarOTD {
-  margin-top:50px;
+  /* margin-top:50px;
+  /* position: absolute; */
+  /* width:640; */
+  width: 640px;
+  height: 50px;
+  position: absolute;
+  right: 0;
+  bottom: 80px;
+  left: 0;
+  margin: auto;
 }
 
 #linkOTD {
@@ -175,4 +184,17 @@ RecipeOTD {
 
 #modal .modal-content {
   border-radius: 0;
+}
+
+#searchBar {
+  border-color: #A84D23;
+  font-family: 'Frank Ruhl Libre';
+  border-radius: 0;
+  width: 400px;
+  height: 40px;
+
+}
+
+#searchBar:hover, #searchBar:focus {
+  box-shadow: 4px 4px 0px #ffb800;
 }

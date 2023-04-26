@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import "./App.css";
-import MainPage from "./Components/MainPage";
+import SearchPage from "./Components/SearchPage";
+import ResultPage from "./Components/ResultPage";
 import LandingPage from "./Components/LandingPage";
+import SavedRecipes from "./Components/SavedRecipes";
 import {Profile} from './Components/Profile';
 import React, { useState } from "react";
 import randomRecipes from'./randomRecipes.json';
@@ -14,14 +16,13 @@ function App() {
   
   return (
     <BrowserRouter>
-    <SearchBar></SearchBar>
-    <RecipeGrid />
       <div>
         {/* The React Router that makes the HTML above work */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/recipes" element={<MainPage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/result" element={<ResultPage />} />
+          <Route path ="/saved" element={<SavedRecipes />} />
         </Routes>
       </div>
     </BrowserRouter>

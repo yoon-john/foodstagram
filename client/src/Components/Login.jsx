@@ -21,8 +21,9 @@ export const Login = (props) => {
       })
       .then((response) => {
         console.log(response);
-        if (response.statusText == 'OK') {
-          navigate('/recipes');
+        localStorage.setItem("token", response.data.token);
+        if (response.statusText === 'OK') {
+          navigate('/search');
         }
       })
       .catch((error) => {

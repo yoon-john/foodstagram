@@ -7,11 +7,11 @@ import './../App.css';
 import RandomRecipes from './../randomRecipes.json'
 
 function RecipeGrid(recipes) {
-  console.log(recipes) 
-  console.log(RandomRecipes.recipes)
+  // console.log(recipes) 
+  // console.log(RandomRecipes.recipes)
   if (recipes.recipes){
   return (
-        <Container fluid="md">
+        <Container fluid="md" >
         <Row md="4">
         <>
         {recipes.recipes.map((r) => (
@@ -23,8 +23,12 @@ function RecipeGrid(recipes) {
             title={r.title}
             readyInMinutes={r.readyInMinutes}
             aggregateLikes={r.aggregateLikes}
-            analyzedInstructions={r.analyzedInstructions[0].steps}
+            analyzedInstructions={
+              r.analyzedInstructions[0] === undefined
+              ? ["No instructions given"]
+              : r.analyzedInstructions[0].steps}
             extendedIngredients={r.extendedIngredients}
+            id = {r.id}            
             >
           </RecipeCard>
           </Col>

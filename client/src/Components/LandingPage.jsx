@@ -14,7 +14,8 @@ function LandingPage() {
   const toggleForm = (formName) => {
     setCurrentForm(formName);
   };
-
+  const i = Math.floor(Math.random() * 10)
+  console.log(i)
   return (
     <div className="App">
       <header className="App-header">
@@ -25,15 +26,17 @@ function LandingPage() {
           <Col md={8} style={{ display: 'flex',
           alignItems: 'center', justifyContent: 'center', }}>
           <RecipeOTD 
-            sourceUrl={randomRecipes.recipes[0].sourceUrl}
-            image={randomRecipes.recipes[0].image} 
-            summary={randomRecipes.recipes[0].summary}
-            dishType={randomRecipes.recipes[0].dishTypes[0] && randomRecipes.recipes[0].dishTypes[0].toUpperCase()} 
-            title={randomRecipes.recipes[0].title}
-            readyInMinutes={randomRecipes.recipes[0].readyInMinutes}
-            aggregateLikes={randomRecipes.recipes[0].aggregateLikes}
-            analyzedInstructions={randomRecipes.recipes[0].analyzedInstructions[0].steps}
-            extendedIngredients={randomRecipes.recipes[0].extendedIngredients}
+            image={randomRecipes.recipes[i].image} 
+            summary={randomRecipes.recipes[i].summary}
+            dishType={randomRecipes.recipes[i].dishTypes[0] && randomRecipes.recipes[i].dishTypes[0].toUpperCase()} 
+            title={randomRecipes.recipes[i].title}
+            readyInMinutes={randomRecipes.recipes[i].readyInMinutes}
+            aggregateLikes={randomRecipes.recipes[i].aggregateLikes}
+            analyzedInstructions={
+              randomRecipes.recipes[i].analyzedInstructions[0] === undefined
+              ? ["No instructions given"]
+              : randomRecipes.recipes[i].analyzedInstructions[0].steps}
+            extendedIngredients={randomRecipes.recipes[i].extendedIngredients}
           />
           </Col>
           <Col md={4} style={{ display: 'flex',

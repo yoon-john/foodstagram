@@ -2,14 +2,14 @@ import React from 'react';
 import NavBar from './NavBar';
 import SearchBar from './SearchBar'
 import RecipeGrid from './RecipeGrid';
+import './../App.css'
 
-function MainPage() {
+function ResultPage() {
     return (
         <div style={{backgrondColor:"#FFFCF3"}}>
-        <NavBar />
-        <SearchBar />
+        <NavBar searchbar={true}/>
         </div>
     );
 }
 
-export default MainPage;
+export default ResultPage;

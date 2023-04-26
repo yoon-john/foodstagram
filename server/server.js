@@ -12,7 +12,7 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 4000;
 
-const apiKey = '6c04a01fada245449194164a742fd887'
+const apiKey = '17010c15c8e94e889163ebf2cc50f61f'
 
 // Middleware
 app.use(cors());
@@ -38,14 +38,20 @@ app.get("/searched-recipes", async function (req, res) {
           for (let i = 0; i < body.data.length; i++) {
               recipeID.push(body.data[i].id)
           }
-          console.log(recipeID);
           const allID = recipeID.map(String).join(',')
-            console.log(allID) // Del
             axios.get(`https://api.spoonacular.com/recipes/informationBulk?apiKey=${apiKey}&ids=${allID}`)
                 .then(body => {
                     res.json(body.data)
                   });
       })
+});
+
+app.get("/saved-recipes", async function (req, res) {
+  const allID = req.query.allIDs;
+axios.get(`https://api.spoonacular.com/recipes/informationBulk?apiKey=${apiKey}&ids=${allID}`)  
+.then(body => {
+    res.json(body.data)
+  });
 });
 
 app.listen(PORT, (req, res) => {
