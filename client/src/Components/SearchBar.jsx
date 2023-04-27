@@ -37,7 +37,7 @@ function SearchBar(props) {
           />
         </Form.Group>
       </Form>
-      <RecipeGrid recipes={recipes}></RecipeGrid>
+      <RecipeGrid recipes={recipes} shouldSave={true}></RecipeGrid>
       </>
     );
 }

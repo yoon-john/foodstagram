@@ -6,9 +6,7 @@ import Row from 'react-bootstrap/Row';
 import './../App.css';
 import RandomRecipes from './../randomRecipes.json'
 
-function RecipeGrid(recipes) {
-  // console.log(recipes) 
-  // console.log(RandomRecipes.recipes)
+function RecipeGrid(recipes, shouldSave) {
   if (recipes.recipes){
   return (
         <Container fluid="md" >
@@ -18,7 +16,7 @@ function RecipeGrid(recipes) {
           <Col>
           <RecipeCard 
             sourceUrl={r.sourceUrl}
-            image={r.image} 
+            image={r.image}
             dishType={r.dishTypes[0] && r.dishTypes[0].toUpperCase()} 
             title={r.title}
             readyInMinutes={r.readyInMinutes}
@@ -28,7 +26,8 @@ function RecipeGrid(recipes) {
               ? ["No instructions given"]
               : r.analyzedInstructions[0].steps}
             extendedIngredients={r.extendedIngredients}
-            id = {r.id}            
+            id = {r.id}
+            shouldSave={shouldSave}      
             >
           </RecipeCard>
           </Col>

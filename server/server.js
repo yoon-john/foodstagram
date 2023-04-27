@@ -12,7 +12,7 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 4000;
 
-const apiKey = '17010c15c8e94e889163ebf2cc50f61f'
+const apiKey = '2fdf4343230b42a484a6648cb08b321f'
 
 // Middleware
 app.use(cors());

@@ -10,9 +10,8 @@ import TimerImg from './../timer.svg';
 import HeartImg from './../heart.svg';
 import SaveImg from './../save.svg';
 
-function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients, id}) {
+function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients, id, shouldSave}) {
   const saveRecipe = () => {
-    console.log("working")
     const token = localStorage.getItem("token");
     axios
       .post(
@@ -22,6 +21,19 @@ function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title,
       )
       .then((res) => {
         console.log("wassup")
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  };
+  const deleteRecipe = () => {
+    const token = localStorage.getItem("token");
+    axios
+      .delete(
+        "http://localhost:4000/user/delete",
+        { item: id },
+        { headers: { token: token } }
+      )
+      .then((res) => {
         console.log(res.data);
       })
       .catch((error) => console.log(error));
@@ -62,9 +74,9 @@ function Instructions({show, onHide, sourceUrl, image, dishType="RECIPE", title,
           alignItems: 'center', justifyContent: 'right', }}>
                   <img id="svg" alt="heart svg" src={HeartImg} width="22"/>
                   {aggregateLikes}
-                  <button onClick={saveRecipe}>
+                  <Button variant="link" id="saveBtn" onClick={shouldSave? saveRecipe : deleteRecipe} >
                     <img id="svg" alt="bookmark svg" src={SaveImg} height="18"/>
-                  </button>
+                  </Button>
                 </Col>
               </Row>
             </Container>

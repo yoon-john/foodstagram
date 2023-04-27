@@ -6,37 +6,9 @@ import axios from 'axios';
 import './../App.css'
 
 function SavedRecipes() {
-    // const [recipes, setRecipes] = useState()
-    // const load_recipe = () => {
-    // let allIDs
-    // console.log("working")
-    // const token = localStorage.getItem("token");
-    // axios
-    // .get("http://localhost:4000/user/recipes", { headers: { token: token } })
-    // .then((res) => {
-    // allIDs = res.data;
-    // console.log("recipes in SavedRecipes.jsx:");
-    // console.log(allIDs);
-    // })
-    // .catch((error) => console.log(error))
-    // .then(() => {
-    //     allIDs = allIDs.map(String).join(',');
-    //     console.log(allIDs)
-    //     axios.get(`http://localhost:4000/saved-recipes?ids=${allIDs}`, {timeout: 10 * 1000})
-    //     .then((res) => {
-    //         setRecipes(res.data)
-    //         console.log(recipes)
-    //         }, (err) => {
-    //             console.log("Error: ", err);
-    //     }
-    // )}
-    // );
-    // }
-    const apiKey = "f25376cbe0d543038f73fcd43b5be7a0";
     let [recipes, setRecipes] = useState();
     const load_recipe = () => {
       let recipeIds;
-      console.log("workinggg");
       const token = localStorage.getItem("token");
       axios
         .get("http://localhost:4000/user/recipes", { headers: { token: token } })
@@ -47,7 +19,6 @@ function SavedRecipes() {
         })
         .catch((error) => console.log(error))
         .then(() => {
-          console.log("ayyyy");
           console.log(recipeIds);
           let recipeIdString = recipeIds.map(String).join(",");
           console.log(recipeIdString);
@@ -75,17 +46,13 @@ function SavedRecipes() {
         return (
           <div>
             <NavBar searchbar={false} />
-            <RecipeGrid recipes={recipes} />
+            <h1 id="Logo" style={{display:"flex", alignItems:"center", justifyContent:"center"}}>
+                Saved Recipes
+            </h1>
+            <RecipeGrid recipes={recipes} shouldSave={false}/>
           </div>
         );
       }
-
-//     return (
-//         <div style={{backgrondColor:"#FFFCF3"}}>
-//         <NavBar searchbar={false}/>
-//         <RecipeGrid recipes={recipes}/>
-//         </div>
-//     );
 }
 
 export default SavedRecipes;

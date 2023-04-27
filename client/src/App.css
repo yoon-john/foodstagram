@@ -198,3 +198,13 @@ RecipeOTD {
 #searchBar:hover, #searchBar:focus {
   box-shadow: 4px 4px 0px #ffb800;
 }
+#saveBtn {
+  background: none;
+  border: none;
+  transition: all 50ms ease-in-out;
+}
+
+#saveBtn:hover {
+  background-color: #ffb800;
+  transition: all 400ms ease-in-out;
+}
