@@ -1,69 +1,118 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Instructions from './Instructions';
-import Container from 'react-bootstrap/Container';
-import Col from 'react-bootstrap/Col';
-import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
-import './../App.css';
-import axios from 'axios';
-import TimerImg from './../timer.svg';
-import HeartImg from './../heart.svg';
-import SaveImg from './../save.svg';
-import SavedImg from './../saved.svg';
-import randomRecipes from'./../randomRecipes.json';
+import React from "react";
+import Card from "react-bootstrap/Card";
+import Instructions from "./Instructions";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import "./../App.css";
+import axios from "axios";
+import TimerImg from "./../timer.svg";
+import HeartImg from "./../heart.svg";
+import SaveImg from "./../save.svg";
+import SavedImg from "./../saved.svg";
+import randomRecipes from "./../randomRecipes.json";
 
-function RecipeCard({sourceUrl, image, dishType="RECIPE", title, readyInMinutes, aggregateLikes, analyzedInstructions, extendedIngredients, id, shouldSave}) {
-  const [modalShow, setModalShow] = React.useState(false);  
+function RecipeCard({
+  sourceUrl,
+  image,
+  dishType = "RECIPE",
+  title,
+  readyInMinutes,
+  aggregateLikes,
+  analyzedInstructions,
+  extendedIngredients,
+  id,
+  shouldSave,
+}) {
+  const [modalShow, setModalShow] = React.useState(false);
   const [saved, setSaved] = React.useState(false);
   const check_recipe = () => {
     const token = localStorage.getItem("token");
-  axios
-        .get("http://localhost:4000/user/recipes", { headers: { token: token } })
-        .then((res) => {
-          if (id in res.data) {
-            setSaved(true);
-          }
-          else if (id in res.data) {
-            setSaved(false)
-          }
-        })
-        .catch((error) => console.log(error))
-      }
-    return (
-      <>
-        <Button id='RecipeCardLink' onClick={() => setModalShow(true)} variant="link" style={{textDecoration: "none", color: "inherit"}}>
-          <Card as='RecipeCard' style={{ width: "300px", height: "400px", borderRadius:0}}>
-            <Card.Img variant="top" alt={title} src={image} style={{borderRadius:0}}/> {/* Replace with "image" from api */}
-            <Card.Body>
-              <Card.Subtitle as="subtext" margin= "10px">{dishType}</Card.Subtitle> {/* Replace with "dishType" from api */}
-              <div></div>
-              <Card.Title as="recipeTitle" margin= "10px">{title}</Card.Title> {/* Replace with "title" from api */}
-              <Container id="bottomBar" fluid>
-                <Row>
-                  <Col id="bottomBarLeft" style={{ display: 'flex',
-            alignItems: 'center', justifyContent: 'left', marginLeft: 0,}}>
-                    <img id="svg" alt="timer svg" src={TimerImg} width="20" verticalAlign="middle"/>
-                    {readyInMinutes} mins 
-                  </Col>
-                  <Col id="bottomBarRight" style={{ display: 'flex',
-            alignItems: 'center', justifyContent: 'right', }}>
-                    <img id="svg" alt="heart svg" src={HeartImg} width="22"/>
-                    {aggregateLikes}
-                    <img id="svg" alt="bookmark svg" src={SaveImg} height="18"/>
-                  </Col>
-                </Row>
-              </Container>
-            </Card.Body>
-  
-          </Card>
-        </Button>
-        <Instructions
+    axios
+      .get("http://localhost:4000/user/recipes", { headers: { token: token } })
+      .then((res) => {
+        if (id in res.data) {
+          setSaved(true);
+        } else if (id in res.data) {
+          setSaved(false);
+        }
+      })
+      .catch((error) => console.log(error));
+  };
+  console.log(shouldSave);
+  return (
+    <>
+      <Button
+        id="RecipeCardLink"
+        onClick={() => setModalShow(true)}
+        variant="link"
+        style={{ textDecoration: "none", color: "inherit" }}
+      >
+        <Card
+          as="RecipeCard"
+          style={{ width: "300px", height: "400px", borderRadius: 0 }}
+        >
+          <Card.Img
+            variant="top"
+            alt={title}
+            src={image}
+            style={{ borderRadius: 0 }}
+          />{" "}
+          {/* Replace with "image" from api */}
+          <Card.Body>
+            <Card.Subtitle as="subtext" margin="10px">
+              {dishType}
+            </Card.Subtitle>{" "}
+            {/* Replace with "dishType" from api */}
+            <div></div>
+            <Card.Title as="recipeTitle" margin="10px">
+              {title}
+            </Card.Title>{" "}
+            {/* Replace with "title" from api */}
+            <Container id="bottomBar" fluid>
+              <Row>
+                <Col
+                  id="bottomBarLeft"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "left",
+                    marginLeft: 0,
+                  }}
+                >
+                  <img
+                    id="svg"
+                    alt="timer svg"
+                    src={TimerImg}
+                    width="20"
+                    verticalAlign="middle"
+                  />
+                  {readyInMinutes} mins
+                </Col>
+                <Col
+                  id="bottomBarRight"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "right",
+                  }}
+                >
+                  <img id="svg" alt="heart svg" src={HeartImg} width="22" />
+                  {aggregateLikes}
+                  <img id="svg" alt="bookmark svg" src={SaveImg} height="18" />
+                </Col>
+              </Row>
+            </Container>
+          </Card.Body>
+        </Card>
+      </Button>
+      <Instructions
         show={modalShow}
         onHide={() => setModalShow(false)}
         sourceUrl={sourceUrl}
-        image={image} 
-        dishType={dishType} 
+        image={image}
+        dishType={dishType}
         title={title}
         readyInMinutes={readyInMinutes}
         aggregateLikes={aggregateLikes}
@@ -72,8 +121,8 @@ function RecipeCard({sourceUrl, image, dishType="RECIPE", title, readyInMinutes,
         id={id}
         shouldSave={shouldSave}
       />
-      </>
-      );
-    }
-  
+    </>
+  );
+}
+
 export default RecipeCard;

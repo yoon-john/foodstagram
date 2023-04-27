@@ -189,7 +189,7 @@ router.put("/update-user", auth, async (req, res) => {
 router.get("/recipes", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    console.log(user.recipes)
+    console.log(user.recipes);
     res.json(user.recipes);
   } catch (e) {
     res.send({ message: "Error in Fetching user's saved recipes" });
@@ -200,11 +200,11 @@ router.get("/recipes", auth, async (req, res) => {
 router.post("/add", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
-    console.log(req.body.item)
+    console.log(req.body.item);
     if (user.recipes.indexOf(req.body.item) === -1) {
       user.recipes.push(req.body.item);
       user.save();
-      console.log("added a recipe to saved recipes")
+      console.log("added a recipe to saved recipes");
       res.json(user.recipes);
     }
   } catch (e) {
@@ -213,7 +213,7 @@ router.post("/add", auth, async (req, res) => {
 });
 
 // Use to delete recipe from user's profile
-router.delete("/delete", auth, async (req, res) => {
+router.post("/delete", auth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
     if (user.recipes.indexOf(req.body.item) != -1) {
