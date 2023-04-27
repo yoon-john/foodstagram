@@ -6,12 +6,9 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import "./../App.css";
-import axios from "axios";
 import TimerImg from "./../timer.svg";
 import HeartImg from "./../heart.svg";
 import SaveImg from "./../save.svg";
-import SavedImg from "./../saved.svg";
-import randomRecipes from "./../randomRecipes.json";
 
 function RecipeCard({
   sourceUrl,
@@ -26,21 +23,6 @@ function RecipeCard({
   shouldSave,
 }) {
   const [modalShow, setModalShow] = React.useState(false);
-  const [saved, setSaved] = React.useState(false);
-  const check_recipe = () => {
-    const token = localStorage.getItem("token");
-    axios
-      .get("http://localhost:4000/user/recipes", { headers: { token: token } })
-      .then((res) => {
-        if (id in res.data) {
-          setSaved(true);
-        } else if (id in res.data) {
-          setSaved(false);
-        }
-      })
-      .catch((error) => console.log(error));
-  };
-  console.log(shouldSave);
   return (
     <>
       <Button

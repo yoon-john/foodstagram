@@ -26,8 +26,6 @@ function Instructions({
 }) {
   const saveRecipe = () => {
     const token = localStorage.getItem("token");
-    console.log("saved");
-    console.log(shouldSave);
     axios
       .post(
         "http://localhost:4000/user/add",
@@ -41,8 +39,6 @@ function Instructions({
   };
   const deleteRecipe = () => {
     const token = localStorage.getItem("token");
-    console.log("deleted");
-    console.log(shouldSave);
     axios
       .post(
         "http://localhost:4000/user/delete",

@@ -12,7 +12,7 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 4000;
 
-const apiKey = "587e19264a7940fa89060d66c1787d04";
+const apiKey = "e67d36f8db4042d2bbd1b92e53bcf16b";
 
 // Middleware
 app.use(cors());
@@ -35,7 +35,7 @@ app.get("/searched-recipes", async function (req, res) {
   const recipeID = [];
   axios
     .get(
-      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredients}`
+      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredients}&number=16`
     )
     .then((body) => {
       for (let i = 0; i < body.data.length; i++) {

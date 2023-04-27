@@ -1,14 +1,11 @@
-import React, { useState } from "react";
 import RecipeCard from "./RecipeCard";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import "./../App.css";
-import RandomRecipes from "./../randomRecipes.json";
 
 function RecipeGrid(props) {
   if (props.recipes) {
-    console.log(props.shouldSave);
     return (
       <Container fluid="md">
         <Row md="4">

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import RecipeGrid from "./RecipeGrid";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
 
-import './../App.css';
+import "./../App.css";
 
 export const Login = (props) => {
   let navigate = useNavigate();
@@ -20,10 +19,9 @@ export const Login = (props) => {
         password: password,
       })
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
-        if (response.statusText === 'OK') {
-          navigate('/search');
+        if (response.statusText === "OK") {
+          navigate("/search");
         }
       })
       .catch((error) => {
@@ -32,15 +30,17 @@ export const Login = (props) => {
   };
 
   return (
-    <Card id='LoginCard'>
+    <Card id="LoginCard">
       <Form width="500" height="500" onSubmit={handleSubmit}>
         <h1 id="Logo">Foodstagram</h1>
         <div id="center">
           <h2 id="loginBlurb">Welcome to Foodstagram</h2>
         </div>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label id='label' htmlFor="email">Email address</Form.Label>
-          <Form.Control 
+          <Form.Label id="label" htmlFor="email">
+            Email address
+          </Form.Label>
+          <Form.Control
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
@@ -49,32 +49,34 @@ export const Login = (props) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label id='label' htmlFor="password">Password</Form.Label>
-          <Form.Control 
+          <Form.Label id="label" htmlFor="password">
+            Password
+          </Form.Label>
+          <Form.Control
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
             name="password"
           />
-        </Form.Group> 
+        </Form.Group>
         <div id="center">
           <Button variant="primary" type="submit" id="mainButton">
             Log In
           </Button>
         </div>
-      <div></div>
-      <a id="label">
-        New to Foodstagram?
-      <Button 
-        variant="link"
-        className="link-btn"
-        onClick={() => props.onFormSwitch("register")}
-      >
-        Create Account
-      </Button>
-      </a>
-    </Form>
+        <div></div>
+        <a id="label">
+          New to Foodstagram?
+          <Button
+            variant="link"
+            className="link-btn"
+            onClick={() => props.onFormSwitch("register")}
+          >
+            Create Account
+          </Button>
+        </a>
+      </Form>
     </Card>
   );
 };

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import './../App.css';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
+import "./../App.css";
 
 export const Register = (props) => {
   const [email, setEmail] = useState();
@@ -28,15 +28,17 @@ export const Register = (props) => {
   };
 
   return (
-    <Card id='LoginCard'>
+    <Card id="LoginCard">
       <Form width="500" height="500" onSubmit={handleSubmit}>
         <h1 id="Logo">Foodstagram</h1>
         <div id="center">
           <h2 id="loginBlurb">Sign up for Foodstagram</h2>
         </div>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label id='label' htmlFor="username">Username</Form.Label>
-          <Form.Control 
+          <Form.Label id="label" htmlFor="username">
+            Username
+          </Form.Label>
+          <Form.Control
             value={username}
             name="username"
             onChange={(e) => setUsername(e.target.value)}
@@ -44,8 +46,10 @@ export const Register = (props) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label id='label' htmlFor="email">Email address</Form.Label>
-          <Form.Control 
+          <Form.Label id="label" htmlFor="email">
+            Email address
+          </Form.Label>
+          <Form.Control
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             type="email"
@@ -54,32 +58,34 @@ export const Register = (props) => {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label id='label' htmlFor="password">Password</Form.Label>
-          <Form.Control 
+          <Form.Label id="label" htmlFor="password">
+            Password
+          </Form.Label>
+          <Form.Control
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type="password"
             id="password"
             name="password"
           />
-        </Form.Group> 
+        </Form.Group>
         <div id="center">
           <Button variant="primary" type="submit" id="mainButton">
             Sign Up
           </Button>
         </div>
         <div></div>
-      <a id="label">
-        Already have an account?
-      <Button 
-        variant="link"
-        className="link-btn"
-        onClick={() => props.onFormSwitch("login")}
-      >
-        Login here.
-      </Button>
-      </a>
-    </Form>
+        <a id="label">
+          Already have an account?
+          <Button
+            variant="link"
+            className="link-btn"
+            onClick={() => props.onFormSwitch("login")}
+          >
+            Login here.
+          </Button>
+        </a>
+      </Form>
     </Card>
   );
 };
