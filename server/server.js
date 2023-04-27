@@ -12,7 +12,8 @@ const app = express();
 // PORT
 const PORT = process.env.PORT || 4000;
 
-const apiKey = "e67d36f8db4042d2bbd1b92e53bcf16b";
+const apiKey = "dd1c3f39f7f84af2b393ed34dd63ebe3";
+//Fresh spare api key: 77c0bb5cc77941f187a07ec0538c086b
 
 // Middleware
 app.use(cors());
