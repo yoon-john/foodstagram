@@ -35,21 +35,21 @@ function LandingPage() {
             }}
           >
             <RecipeOTD
-              image={randomRecipes.recipes[i].image}
-              summary={randomRecipes.recipes[i].summary}
+              image={randomRecipes.recipes[9].image}
+              summary={randomRecipes.recipes[9].summary}
               dishType={
-                randomRecipes.recipes[i].dishTypes[0] &&
-                randomRecipes.recipes[i].dishTypes[0].toUpperCase()
+                randomRecipes.recipes[9].dishTypes[0] &&
+                randomRecipes.recipes[9].dishTypes[0].toUpperCase()
               }
-              title={randomRecipes.recipes[i].title}
-              readyInMinutes={randomRecipes.recipes[i].readyInMinutes}
-              aggregateLikes={randomRecipes.recipes[i].aggregateLikes}
+              title={randomRecipes.recipes[9].title}
+              readyInMinutes={randomRecipes.recipes[9].readyInMinutes}
+              aggregateLikes={randomRecipes.recipes[9].aggregateLikes}
               analyzedInstructions={
-                randomRecipes.recipes[i].analyzedInstructions[0] === undefined
+                randomRecipes.recipes[9].analyzedInstructions[0] === undefined
                   ? ["No instructions given"]
-                  : randomRecipes.recipes[i].analyzedInstructions[0].steps
+                  : randomRecipes.recipes[9].analyzedInstructions[0].steps
               }
-              extendedIngredients={randomRecipes.recipes[i].extendedIngredients}
+              extendedIngredients={randomRecipes.recipes[9].extendedIngredients}
             />
           </Col>
           <Col
